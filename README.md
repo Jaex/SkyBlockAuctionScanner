@@ -1,1 +1,3 @@
 # SkyBlockAuctionScanner
+
+![Screenshot](Screenshot.png)
