@@ -39,10 +39,11 @@ namespace SkyBlockAuctionScanner
 
             SearchFilter = searchFilter;
 
+            cbEnabled.Checked = SearchFilter.Enabled;
             txtItemName.Text = SearchFilter.ItemName;
             cbUseRegex.Checked = SearchFilter.UseRegex;
             nudItemLevel.Value = SearchFilter.ItemLevel;
-            nudItemStars.Value = searchFilter.ItemStars;
+            nudItemStars.Value = SearchFilter.ItemStars;
             cbItemTier.Items.AddRange(Helpers.GetEnumDescriptions<SkyBlockItemTier>());
             cbItemTier.SelectedIndex = (int)SearchFilter.ItemTier;
             cbBINFilter.Items.AddRange(Helpers.GetEnumDescriptions<SkyBlockBINFilter>());
@@ -52,6 +53,7 @@ namespace SkyBlockAuctionScanner
 
         private void SaveChanges()
         {
+            SearchFilter.Enabled = cbEnabled.Checked;
             SearchFilter.ItemName = txtItemName.Text;
             SearchFilter.UseRegex = cbUseRegex.Checked;
             SearchFilter.ItemLevel = (int)nudItemLevel.Value;

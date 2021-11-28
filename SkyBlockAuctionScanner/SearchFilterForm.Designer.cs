@@ -43,6 +43,7 @@
             this.cbBINFilter = new System.Windows.Forms.ComboBox();
             this.lblItemStars = new System.Windows.Forms.Label();
             this.nudItemStars = new System.Windows.Forms.NumericUpDown();
+            this.cbEnabled = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudItemLevel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPriceLimit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudItemStars)).BeginInit();
@@ -51,77 +52,77 @@
             // lblItemName
             // 
             this.lblItemName.AutoSize = true;
-            this.lblItemName.Location = new System.Drawing.Point(13, 16);
+            this.lblItemName.Location = new System.Drawing.Point(13, 48);
             this.lblItemName.Name = "lblItemName";
             this.lblItemName.Size = new System.Drawing.Size(72, 16);
-            this.lblItemName.TabIndex = 0;
+            this.lblItemName.TabIndex = 1;
             this.lblItemName.Text = "Item name:";
             // 
             // txtItemName
             // 
-            this.txtItemName.Location = new System.Drawing.Point(16, 40);
+            this.txtItemName.Location = new System.Drawing.Point(16, 72);
             this.txtItemName.Name = "txtItemName";
             this.txtItemName.Size = new System.Drawing.Size(304, 22);
-            this.txtItemName.TabIndex = 1;
+            this.txtItemName.TabIndex = 2;
             this.txtItemName.TextChanged += new System.EventHandler(this.txtItemName_TextChanged);
             // 
             // cbUseRegex
             // 
             this.cbUseRegex.AutoSize = true;
-            this.cbUseRegex.Location = new System.Drawing.Point(16, 72);
+            this.cbUseRegex.Location = new System.Drawing.Point(16, 104);
             this.cbUseRegex.Name = "cbUseRegex";
             this.cbUseRegex.Size = new System.Drawing.Size(88, 20);
-            this.cbUseRegex.TabIndex = 2;
+            this.cbUseRegex.TabIndex = 3;
             this.cbUseRegex.Text = "Use regex";
             this.cbUseRegex.UseVisualStyleBackColor = true;
             // 
             // lblItemLevel
             // 
             this.lblItemLevel.AutoSize = true;
-            this.lblItemLevel.Location = new System.Drawing.Point(13, 104);
+            this.lblItemLevel.Location = new System.Drawing.Point(13, 136);
             this.lblItemLevel.Name = "lblItemLevel";
             this.lblItemLevel.Size = new System.Drawing.Size(67, 16);
-            this.lblItemLevel.TabIndex = 3;
+            this.lblItemLevel.TabIndex = 4;
             this.lblItemLevel.Text = "Item level:";
             // 
             // nudItemLevel
             // 
-            this.nudItemLevel.Location = new System.Drawing.Point(16, 128);
+            this.nudItemLevel.Location = new System.Drawing.Point(16, 160);
             this.nudItemLevel.Name = "nudItemLevel";
             this.nudItemLevel.Size = new System.Drawing.Size(72, 22);
-            this.nudItemLevel.TabIndex = 4;
+            this.nudItemLevel.TabIndex = 5;
             this.nudItemLevel.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblItemTier
             // 
             this.lblItemTier.AutoSize = true;
-            this.lblItemTier.Location = new System.Drawing.Point(13, 216);
+            this.lblItemTier.Location = new System.Drawing.Point(13, 248);
             this.lblItemTier.Name = "lblItemTier";
             this.lblItemTier.Size = new System.Drawing.Size(56, 16);
-            this.lblItemTier.TabIndex = 7;
+            this.lblItemTier.TabIndex = 8;
             this.lblItemTier.Text = "Item tier:";
             // 
             // cbItemTier
             // 
             this.cbItemTier.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbItemTier.FormattingEnabled = true;
-            this.cbItemTier.Location = new System.Drawing.Point(16, 240);
+            this.cbItemTier.Location = new System.Drawing.Point(16, 272);
             this.cbItemTier.Name = "cbItemTier";
             this.cbItemTier.Size = new System.Drawing.Size(144, 24);
-            this.cbItemTier.TabIndex = 8;
+            this.cbItemTier.TabIndex = 9;
             // 
             // lblPriceLimit
             // 
             this.lblPriceLimit.AutoSize = true;
-            this.lblPriceLimit.Location = new System.Drawing.Point(13, 328);
+            this.lblPriceLimit.Location = new System.Drawing.Point(13, 360);
             this.lblPriceLimit.Name = "lblPriceLimit";
             this.lblPriceLimit.Size = new System.Drawing.Size(67, 16);
-            this.lblPriceLimit.TabIndex = 11;
+            this.lblPriceLimit.TabIndex = 12;
             this.lblPriceLimit.Text = "Price limit:";
             // 
             // nudPriceLimit
             // 
-            this.nudPriceLimit.Location = new System.Drawing.Point(16, 352);
+            this.nudPriceLimit.Location = new System.Drawing.Point(16, 384);
             this.nudPriceLimit.Maximum = new decimal(new int[] {
             1410065408,
             2,
@@ -129,7 +130,7 @@
             0});
             this.nudPriceLimit.Name = "nudPriceLimit";
             this.nudPriceLimit.Size = new System.Drawing.Size(144, 22);
-            this.nudPriceLimit.TabIndex = 12;
+            this.nudPriceLimit.TabIndex = 13;
             this.nudPriceLimit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nudPriceLimit.ThousandsSeparator = true;
             this.nudPriceLimit.Value = new decimal(new int[] {
@@ -141,20 +142,20 @@
             // btnOK
             // 
             this.btnOK.Enabled = false;
-            this.btnOK.Location = new System.Drawing.Point(104, 400);
+            this.btnOK.Location = new System.Drawing.Point(104, 432);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(104, 32);
-            this.btnOK.TabIndex = 13;
+            this.btnOK.TabIndex = 14;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(216, 400);
+            this.btnCancel.Location = new System.Drawing.Point(216, 432);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(104, 32);
-            this.btnCancel.TabIndex = 14;
+            this.btnCancel.TabIndex = 15;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -162,33 +163,33 @@
             // lblBINFilter
             // 
             this.lblBINFilter.AutoSize = true;
-            this.lblBINFilter.Location = new System.Drawing.Point(13, 272);
+            this.lblBINFilter.Location = new System.Drawing.Point(13, 304);
             this.lblBINFilter.Name = "lblBINFilter";
             this.lblBINFilter.Size = new System.Drawing.Size(59, 16);
-            this.lblBINFilter.TabIndex = 9;
+            this.lblBINFilter.TabIndex = 10;
             this.lblBINFilter.Text = "BIN filter:";
             // 
             // cbBINFilter
             // 
             this.cbBINFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbBINFilter.FormattingEnabled = true;
-            this.cbBINFilter.Location = new System.Drawing.Point(16, 296);
+            this.cbBINFilter.Location = new System.Drawing.Point(16, 328);
             this.cbBINFilter.Name = "cbBINFilter";
             this.cbBINFilter.Size = new System.Drawing.Size(144, 24);
-            this.cbBINFilter.TabIndex = 10;
+            this.cbBINFilter.TabIndex = 11;
             // 
             // lblItemStars
             // 
             this.lblItemStars.AutoSize = true;
-            this.lblItemStars.Location = new System.Drawing.Point(13, 160);
+            this.lblItemStars.Location = new System.Drawing.Point(13, 192);
             this.lblItemStars.Name = "lblItemStars";
             this.lblItemStars.Size = new System.Drawing.Size(67, 16);
-            this.lblItemStars.TabIndex = 5;
+            this.lblItemStars.TabIndex = 6;
             this.lblItemStars.Text = "Item stars:";
             // 
             // nudItemStars
             // 
-            this.nudItemStars.Location = new System.Drawing.Point(16, 184);
+            this.nudItemStars.Location = new System.Drawing.Point(16, 216);
             this.nudItemStars.Maximum = new decimal(new int[] {
             5,
             0,
@@ -196,15 +197,26 @@
             0});
             this.nudItemStars.Name = "nudItemStars";
             this.nudItemStars.Size = new System.Drawing.Size(72, 22);
-            this.nudItemStars.TabIndex = 6;
+            this.nudItemStars.TabIndex = 7;
             this.nudItemStars.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // cbEnabled
+            // 
+            this.cbEnabled.AutoSize = true;
+            this.cbEnabled.Location = new System.Drawing.Point(16, 16);
+            this.cbEnabled.Name = "cbEnabled";
+            this.cbEnabled.Size = new System.Drawing.Size(77, 20);
+            this.cbEnabled.TabIndex = 0;
+            this.cbEnabled.Text = "Enabled";
+            this.cbEnabled.UseVisualStyleBackColor = true;
             // 
             // SearchFilterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(336, 445);
+            this.ClientSize = new System.Drawing.Size(336, 480);
+            this.Controls.Add(this.cbEnabled);
             this.Controls.Add(this.nudItemStars);
             this.Controls.Add(this.lblItemStars);
             this.Controls.Add(this.cbBINFilter);
@@ -253,5 +265,6 @@
         private System.Windows.Forms.ComboBox cbBINFilter;
         private System.Windows.Forms.Label lblItemStars;
         private System.Windows.Forms.NumericUpDown nudItemStars;
+        private System.Windows.Forms.CheckBox cbEnabled;
     }
 }

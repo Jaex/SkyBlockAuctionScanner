@@ -25,6 +25,7 @@
 using ShareX.HelpersLib;
 using SkyBlockAPILib;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace SkyBlockAuctionScanner
@@ -57,8 +58,11 @@ namespace SkyBlockAuctionScanner
         {
             ListViewItem lvi = new ListViewItem();
             lvi.Tag = searchFilter;
+            if (!searchFilter.Enabled)
+            {
+                lvi.ForeColor = Color.IndianRed;
+            }
             lvi.Text = searchFilter.ToString();
-            lvi.Checked = searchFilter.Enabled;
             lvi.SubItems.Add(searchFilter.ItemTier.GetDescription());
             lvi.SubItems.Add(searchFilter.BINFilter.GetDescription());
             lvi.SubItems.Add(searchFilter.PriceLimit.ToString("N0"));
@@ -79,6 +83,14 @@ namespace SkyBlockAuctionScanner
                     {
                         if (form.ShowDialog() == DialogResult.OK)
                         {
+                            if (searchFilter.Enabled)
+                            {
+                                lvi.ForeColor = ShareXResources.Theme.TextColor;
+                            }
+                            else
+                            {
+                                lvi.ForeColor = Color.IndianRed;
+                            }
                             lvi.Text = searchFilter.ToString();
                             lvi.SubItems[1].Text = searchFilter.ItemTier.GetDescription();
                             lvi.SubItems[2].Text = searchFilter.BINFilter.GetDescription();
@@ -121,16 +133,6 @@ namespace SkyBlockAuctionScanner
         private void lvSearchFilters_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             UpdateButtonStates();
-        }
-
-        private void lvSearchFilters_ItemChecked(object sender, ItemCheckedEventArgs e)
-        {
-            SkyBlockAuctionFilter searchFilter = e.Item.Tag as SkyBlockAuctionFilter;
-
-            if (searchFilter != null)
-            {
-                searchFilter.Enabled = e.Item.Checked;
-            }
         }
 
         private void lvSearchFilters_MouseDoubleClick(object sender, MouseEventArgs e)

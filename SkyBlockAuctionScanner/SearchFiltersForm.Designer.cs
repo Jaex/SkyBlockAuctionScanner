@@ -78,7 +78,6 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lvSearchFilters.AutoFillColumn = true;
             this.lvSearchFilters.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lvSearchFilters.CheckBoxes = true;
             this.lvSearchFilters.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.chItemName,
             this.chItemTier,
@@ -95,7 +94,6 @@
             this.lvSearchFilters.TabIndex = 3;
             this.lvSearchFilters.UseCompatibleStateImageBehavior = false;
             this.lvSearchFilters.View = System.Windows.Forms.View.Details;
-            this.lvSearchFilters.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.lvSearchFilters_ItemChecked);
             this.lvSearchFilters.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvSearchFilters_ItemSelectionChanged);
             this.lvSearchFilters.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvSearchFilters_MouseDoubleClick);
             // 
