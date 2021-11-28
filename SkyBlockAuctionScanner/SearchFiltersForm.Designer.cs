@@ -36,6 +36,7 @@
             this.chItemTier = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chBINFilter = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chPriceLimit = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnSort = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnEdit
@@ -91,7 +92,7 @@
             this.lvSearchFilters.MultiSelect = false;
             this.lvSearchFilters.Name = "lvSearchFilters";
             this.lvSearchFilters.Size = new System.Drawing.Size(768, 504);
-            this.lvSearchFilters.TabIndex = 3;
+            this.lvSearchFilters.TabIndex = 4;
             this.lvSearchFilters.UseCompatibleStateImageBehavior = false;
             this.lvSearchFilters.View = System.Windows.Forms.View.Details;
             this.lvSearchFilters.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvSearchFilters_ItemSelectionChanged);
@@ -117,12 +118,23 @@
             this.chPriceLimit.Text = "Price limit";
             this.chPriceLimit.Width = 120;
             // 
+            // btnSort
+            // 
+            this.btnSort.Location = new System.Drawing.Point(416, 8);
+            this.btnSort.Name = "btnSort";
+            this.btnSort.Size = new System.Drawing.Size(128, 32);
+            this.btnSort.TabIndex = 3;
+            this.btnSort.Text = "Sort";
+            this.btnSort.UseVisualStyleBackColor = true;
+            this.btnSort.Click += new System.EventHandler(this.btnSort_Click);
+            // 
             // SearchFiltersForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.btnSort);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnRemove);
             this.Controls.Add(this.btnAdd);
@@ -147,5 +159,6 @@
         private System.Windows.Forms.ColumnHeader chItemTier;
         private System.Windows.Forms.ColumnHeader chBINFilter;
         private System.Windows.Forms.ColumnHeader chPriceLimit;
+        private System.Windows.Forms.Button btnSort;
     }
 }

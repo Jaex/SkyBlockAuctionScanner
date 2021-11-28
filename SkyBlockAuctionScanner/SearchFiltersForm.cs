@@ -26,6 +26,7 @@ using ShareX.HelpersLib;
 using SkyBlockAPILib;
 using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace SkyBlockAuctionScanner
@@ -127,6 +128,18 @@ namespace SkyBlockAuctionScanner
                 int index = lvSearchFilters.SelectedIndices[0];
                 Settings.SearchFilters.RemoveAt(index);
                 lvSearchFilters.Items.RemoveAt(index);
+            }
+        }
+
+        private void btnSort_Click(object sender, EventArgs e)
+        {
+            Settings.SearchFilters = Settings.SearchFilters.OrderBy(x => !x.Enabled).ThenBy(x => x.ItemName).ThenBy(x => x.ItemLevel).ToList();
+
+            lvSearchFilters.Items.Clear();
+
+            foreach (SkyBlockAuctionFilter searchFilter in Settings.SearchFilters)
+            {
+                AddSearchFilter(searchFilter);
             }
         }
 
