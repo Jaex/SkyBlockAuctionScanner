@@ -127,13 +127,16 @@ namespace SkyBlockAuctionScanner
                 {
                     SkyBlockAuction[] auctionsFiltered = filter.ApplyFilter(auctions);
 
-                    foreach (SkyBlockAuction auction in auctionsFiltered)
+                    if (auctionsFiltered != null)
                     {
-                        if (!auctionsFound.ContainsKey(auction.UUID))
+                        foreach (SkyBlockAuction auction in auctionsFiltered)
                         {
-                            auctionsFound.Add(auction.UUID, auction);
+                            if (!auctionsFound.ContainsKey(auction.UUID))
+                            {
+                                auctionsFound.Add(auction.UUID, auction);
 
-                            OnNewAuctionFound(auction);
+                                OnNewAuctionFound(auction);
+                            }
                         }
                     }
                 }

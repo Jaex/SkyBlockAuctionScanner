@@ -34,6 +34,7 @@ namespace SkyBlockAPILib
     {
         private const char SkyBlockItemStar = '✪';
 
+        public bool Enabled { get; set; } = true;
         public string ItemName { get; set; } = "";
         public bool UseRegex { get; set; } = false;
         public int ItemLevel { get; set; } = 0;
@@ -64,7 +65,7 @@ namespace SkyBlockAPILib
 
         public SkyBlockAuction[] ApplyFilter(SkyBlockAuction[] auctions, bool orderByStartingBid = false)
         {
-            if (auctions == null || string.IsNullOrEmpty(ItemName))
+            if (auctions == null || !Enabled || string.IsNullOrWhiteSpace(ItemName))
             {
                 return null;
             }
