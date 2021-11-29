@@ -48,14 +48,25 @@ namespace SkyBlockAPILib
             return await GetActiveAuctions(page, CancellationToken.None);
         }
 
-        // Active auctions: https://api.hypixel.net/#tag/SkyBlock/paths/~1skyblock~1auctions/get
         public async Task<SkyBlockActiveAuctions> GetActiveAuctions(int page, CancellationToken cancellationToken)
         {
+            // Active auctions: https://api.hypixel.net/#tag/SkyBlock/paths/~1skyblock~1auctions/get
             string url = "https://api.hypixel.net/skyblock/auctions?page=" + page;
-            HttpResponseMessage responseMesssage = await client.GetAsync(url, cancellationToken);
-            string responseBody = await responseMesssage.Content.ReadAsStringAsync();
-            SkyBlockActiveAuctions activeAuctions = JsonConvert.DeserializeObject<SkyBlockActiveAuctions>(responseBody);
-            return activeAuctions;
+
+            using (HttpResponseMessage responseMesssage = await client.GetAsync(url, cancellationToken).ConfigureAwait(false))
+            {
+                if (responseMesssage.IsSuccessStatusCode)
+                {
+                    string responseBody = await responseMesssage.Content.ReadAsStringAsync();
+
+                    if (!string.IsNullOrEmpty(responseBody))
+                    {
+                        return JsonConvert.DeserializeObject<SkyBlockActiveAuctions>(responseBody);
+                    }
+                }
+            }
+
+            return null;
         }
     }
 }
