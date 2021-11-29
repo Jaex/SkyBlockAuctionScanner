@@ -175,11 +175,11 @@ namespace SkyBlockAuctionScanner
                 await auctionManager.Start();
 
                 btnStart.Text = tsmiStart.Text = "Start";
-                btnStart.Enabled = btnFilters.Enabled = tsmiFilters.Enabled = btnSettings.Enabled = tsmiSettings.Enabled = true;
+                btnStart.Enabled = tsmiStart.Enabled = btnFilters.Enabled = tsmiFilters.Enabled = btnSettings.Enabled = tsmiSettings.Enabled = true;
             }
             else
             {
-                btnStart.Enabled = false;
+                btnStart.Enabled = tsmiStart.Enabled = false;
                 auctionManager.Stop();
             }
         }
