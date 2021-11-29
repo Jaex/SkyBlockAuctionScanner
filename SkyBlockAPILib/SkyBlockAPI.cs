@@ -25,6 +25,7 @@
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SkyBlockAPILib
@@ -42,13 +43,19 @@ namespace SkyBlockAPILib
             };
         }
 
+        public async Task<SkyBlockActiveAuctions> GetActiveAuctions(int page)
+        {
+            return await GetActiveAuctions(page, CancellationToken.None);
+        }
+
         // Active auctions: https://api.hypixel.net/#tag/SkyBlock/paths/~1skyblock~1auctions/get
-        public async Task<SkyBlockActiveAuctions> GetActiveAuctions(int page = 0)
+        public async Task<SkyBlockActiveAuctions> GetActiveAuctions(int page, CancellationToken cancellationToken)
         {
             string url = "https://api.hypixel.net/skyblock/auctions?page=" + page;
-            string responseBody = await client.GetStringAsync(url);
-            SkyBlockActiveAuctions response = JsonConvert.DeserializeObject<SkyBlockActiveAuctions>(responseBody);
-            return response;
+            HttpResponseMessage responseMesssage = await client.GetAsync(url, cancellationToken);
+            string responseBody = await responseMesssage.Content.ReadAsStringAsync();
+            SkyBlockActiveAuctions activeAuctions = JsonConvert.DeserializeObject<SkyBlockActiveAuctions>(responseBody);
+            return activeAuctions;
         }
     }
 }

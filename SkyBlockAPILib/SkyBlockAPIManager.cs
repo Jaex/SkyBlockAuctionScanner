@@ -70,7 +70,7 @@ namespace SkyBlockAPILib
             {
                 try
                 {
-                    SkyBlockActiveAuctions activeAuctions = await api.GetActiveAuctions(0);
+                    SkyBlockActiveAuctions activeAuctions = await api.GetActiveAuctions(0, cancellationToken);
 
                     if (activeAuctions != null && activeAuctions.Success && lastUpdated != activeAuctions.LastUpdated)
                     {
@@ -98,7 +98,7 @@ namespace SkyBlockAPILib
                 {
                     if (!cancellationToken.IsCancellationRequested)
                     {
-                        SkyBlockActiveAuctions activeAuctions = await api.GetActiveAuctions(page);
+                        SkyBlockActiveAuctions activeAuctions = await api.GetActiveAuctions(page, cancellationToken);
 
                         if (activeAuctions != null && activeAuctions.Success)
                         {
