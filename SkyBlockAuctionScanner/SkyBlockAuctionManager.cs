@@ -28,6 +28,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SkyBlockAuctionScanner
 {
@@ -49,6 +50,7 @@ namespace SkyBlockAuctionScanner
 
         private CancellationTokenSource cts;
         private Dictionary<string, SkyBlockAuction> auctionsFound;
+        private bool filtersTested;
 
         public SkyBlockAuctionManager(Settings settings)
         {
@@ -91,7 +93,7 @@ namespace SkyBlockAuctionScanner
 
             IsRunning = true;
             auctionsFound = new Dictionary<string, SkyBlockAuction>();
-
+            filtersTested = false;
             cts = new CancellationTokenSource();
 
             try
@@ -103,6 +105,12 @@ namespace SkyBlockAuctionScanner
                     await APIManager.UpdateAuctions(cancellationToken);
 
                     OnScannerFinished();
+
+                    if (!filtersTested)
+                    {
+                        TestFilters(APIManager.Auctions, Settings.SearchFilters);
+                        filtersTested = true;
+                    }
                 }
             }
             catch (Exception e)
@@ -119,7 +127,7 @@ namespace SkyBlockAuctionScanner
             }
         }
 
-        private void SearchItems(SkyBlockAuction[] auctions, List<SkyBlockAuctionFilter> filters)
+        private void SearchItems(IEnumerable<SkyBlockAuction> auctions, List<SkyBlockAuctionFilter> filters)
         {
             if (filters != null)
             {
@@ -141,6 +149,31 @@ namespace SkyBlockAuctionScanner
                     }
                 }
             }
+        }
+
+        private bool TestFilters(IEnumerable<SkyBlockAuction> auctions, List<SkyBlockAuctionFilter> filters)
+        {
+            if (filters != null)
+            {
+                List<string> itemNames = new List<string>();
+
+                foreach (SkyBlockAuctionFilter filter in filters)
+                {
+                    if (!filter.TestItemName(auctions))
+                    {
+                        itemNames.Add(filter.ItemName);
+                    }
+                }
+
+                if (itemNames.Count > 0)
+                {
+                    MessageBox.Show("Unable to find these items:\r\n\r\n" + string.Join("\r\n", itemNames) + "\r\n\r\nMake sure item names are correct!",
+                        Program.Name, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         public void Stop()

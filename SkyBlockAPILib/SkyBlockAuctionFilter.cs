@@ -63,35 +63,33 @@ namespace SkyBlockAPILib
             return itemName;
         }
 
-        public SkyBlockAuction[] ApplyFilter(SkyBlockAuction[] auctions, bool orderByStartingBid = false)
+        public SkyBlockAuction[] ApplyFilter(IEnumerable<SkyBlockAuction> auctions, bool orderByStartingBid = false)
         {
             if (auctions == null || !Enabled || string.IsNullOrWhiteSpace(ItemName))
             {
                 return null;
             }
 
-            IEnumerable<SkyBlockAuction> auctionsFiltered = auctions;
-
             if (BINFilter != SkyBlockBINFilter.SHOW_ALL)
             {
                 bool bin = BINFilter == SkyBlockBINFilter.BIN_ONLY;
-                auctionsFiltered = auctionsFiltered.Where(x => x.Bin == bin);
+                auctions = auctions.Where(x => x.Bin == bin);
             }
 
             if (UseRegex)
             {
                 Regex regex = new Regex(ItemName, RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
-                auctionsFiltered = auctionsFiltered.Where(x => regex.IsMatch(x.ItemName));
+                auctions = auctions.Where(x => regex.IsMatch(x.ItemName));
             }
             else
             {
-                auctionsFiltered = auctionsFiltered.Where(x => x.ItemName.Contains(ItemName, StringComparison.OrdinalIgnoreCase));
+                auctions = auctions.Where(x => x.ItemName.Contains(ItemName, StringComparison.OrdinalIgnoreCase));
             }
 
             if (ItemLevel > 0)
             {
                 Regex regex = new Regex(@"^\[Lvl (\d+)\] .+$", RegexOptions.Compiled);
-                auctionsFiltered = auctionsFiltered.Where(x =>
+                auctions = auctions.Where(x =>
                 {
                     Match match = regex.Match(x.ItemName);
                     return match.Success && int.TryParse(match.Groups[1].Value, out int level) && level >= ItemLevel;
@@ -101,26 +99,44 @@ namespace SkyBlockAPILib
             if (ItemStars > 0)
             {
                 string stars = new string(SkyBlockItemStar, ItemStars);
-                auctionsFiltered = auctionsFiltered.Where(x => x.ItemName.EndsWith(stars, StringComparison.OrdinalIgnoreCase));
+                auctions = auctions.Where(x => x.ItemName.EndsWith(stars, StringComparison.OrdinalIgnoreCase));
             }
 
             if (ItemTier != SkyBlockItemTier.NO_FILTER)
             {
                 string tier = ItemTier.ToString();
-                auctionsFiltered = auctionsFiltered.Where(x => x.Tier.Equals(tier, StringComparison.OrdinalIgnoreCase));
+                auctions = auctions.Where(x => x.Tier.Equals(tier, StringComparison.OrdinalIgnoreCase));
             }
 
             if (PriceLimit > 0)
             {
-                auctionsFiltered = auctionsFiltered.Where(x => x.StartingBid <= PriceLimit);
+                auctions = auctions.Where(x => x.StartingBid <= PriceLimit);
             }
 
             if (orderByStartingBid)
             {
-                auctionsFiltered = auctionsFiltered.OrderBy(x => x.StartingBid);
+                auctions = auctions.OrderBy(x => x.StartingBid);
             }
 
-            return auctionsFiltered.ToArray();
+            return auctions.ToArray();
+        }
+
+        public bool TestItemName(IEnumerable<SkyBlockAuction> auctions)
+        {
+            if (!string.IsNullOrWhiteSpace(ItemName))
+            {
+                if (UseRegex)
+                {
+                    Regex regex = new Regex(ItemName, RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+                    return auctions.Any(x => regex.IsMatch(x.ItemName));
+                }
+                else
+                {
+                    return auctions.Any(x => x.ItemName.Contains(ItemName, StringComparison.OrdinalIgnoreCase));
+                }
+            }
+
+            return false;
         }
     }
 }
