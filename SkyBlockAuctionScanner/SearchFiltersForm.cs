@@ -136,6 +136,7 @@ namespace SkyBlockAuctionScanner
             Settings.SearchFilters = Settings.SearchFilters.
                 OrderBy(x => !x.Enabled).
                 ThenBy(x => x.ItemName).
+                ThenBy(x => x.ItemLore).
                 ThenBy(x => x.ItemLevel).
                 ThenBy(x => x.ItemStars).
                 ThenBy(x => x.ItemTier).

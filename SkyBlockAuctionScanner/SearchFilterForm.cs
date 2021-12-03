@@ -41,7 +41,9 @@ namespace SkyBlockAuctionScanner
 
             cbEnabled.Checked = SearchFilter.Enabled;
             txtItemName.Text = SearchFilter.ItemName;
-            cbUseRegex.Checked = SearchFilter.UseRegex;
+            cbItemNameUseRegex.Checked = SearchFilter.ItemNameUseRegex;
+            txtItemLore.Text = SearchFilter.ItemLore;
+            cbItemLoreUseRegex.Checked = SearchFilter.ItemLoreUseRegex;
             nudItemLevel.Value = SearchFilter.ItemLevel;
             nudItemStars.Value = SearchFilter.ItemStars;
             cbItemTier.Items.AddRange(Helpers.GetEnumDescriptions<SkyBlockItemTier>());
@@ -55,7 +57,9 @@ namespace SkyBlockAuctionScanner
         {
             SearchFilter.Enabled = cbEnabled.Checked;
             SearchFilter.ItemName = txtItemName.Text;
-            SearchFilter.UseRegex = cbUseRegex.Checked;
+            SearchFilter.ItemNameUseRegex = cbItemNameUseRegex.Checked;
+            SearchFilter.ItemLore = txtItemLore.Text;
+            SearchFilter.ItemLoreUseRegex = cbItemLoreUseRegex.Checked;
             SearchFilter.ItemLevel = (int)nudItemLevel.Value;
             SearchFilter.ItemStars = (int)nudItemStars.Value;
             SearchFilter.ItemTier = (SkyBlockItemTier)cbItemTier.SelectedIndex;

@@ -36,7 +36,9 @@ namespace SkyBlockAPILib
 
         public bool Enabled { get; set; } = true;
         public string ItemName { get; set; } = "";
-        public bool UseRegex { get; set; } = false;
+        public bool ItemNameUseRegex { get; set; } = false;
+        public string ItemLore { get; set; } = "";
+        public bool ItemLoreUseRegex { get; set; } = false;
         public int ItemLevel { get; set; } = 0;
         public int ItemStars { get; set; } = 0;
         public SkyBlockItemTier ItemTier { get; set; } = SkyBlockItemTier.NO_FILTER;
@@ -60,6 +62,11 @@ namespace SkyBlockAPILib
                 itemName += " " + stars;
             }
 
+            if (!string.IsNullOrWhiteSpace(ItemLore))
+            {
+                itemName += " (" + ItemLore + ")";
+            }
+
             return itemName;
         }
 
@@ -76,7 +83,7 @@ namespace SkyBlockAPILib
                 auctions = auctions.Where(x => x.Bin == bin);
             }
 
-            if (UseRegex)
+            if (ItemNameUseRegex)
             {
                 Regex regex = new Regex(ItemName, RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
                 auctions = auctions.Where(x => regex.IsMatch(x.ItemName));
@@ -84,6 +91,19 @@ namespace SkyBlockAPILib
             else
             {
                 auctions = auctions.Where(x => x.ItemName.Contains(ItemName, StringComparison.OrdinalIgnoreCase));
+            }
+
+            if (!string.IsNullOrWhiteSpace(ItemLore))
+            {
+                if (ItemLoreUseRegex)
+                {
+                    Regex regex = new Regex(ItemLore, RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+                    auctions = auctions.Where(x => regex.IsMatch(x.ItemLore));
+                }
+                else
+                {
+                    auctions = auctions.Where(x => x.ItemLore.Contains(ItemLore, StringComparison.OrdinalIgnoreCase));
+                }
             }
 
             if (ItemLevel > 0)
@@ -125,7 +145,7 @@ namespace SkyBlockAPILib
         {
             if (!string.IsNullOrWhiteSpace(ItemName))
             {
-                if (UseRegex)
+                if (ItemNameUseRegex)
                 {
                     Regex regex = new Regex(ItemName, RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
                     return auctions.Any(x => regex.IsMatch(x.ItemName));
