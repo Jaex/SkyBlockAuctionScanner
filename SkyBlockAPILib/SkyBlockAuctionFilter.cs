@@ -25,6 +25,7 @@
 using ShareX.HelpersLib;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -157,6 +158,39 @@ namespace SkyBlockAPILib
             }
 
             return false;
+        }
+
+        public Color GetTextColor()
+        {
+            if (!Enabled)
+            {
+                return Color.FromArgb(85, 85, 85);
+            }
+
+            switch (ItemTier)
+            {
+                default:
+                case SkyBlockItemTier.NO_FILTER:
+                    return Color.FromArgb(210, 210, 210);
+                case SkyBlockItemTier.COMMON:
+                    return Color.FromArgb(255, 255, 255);
+                case SkyBlockItemTier.UNCOMMON:
+                    return Color.FromArgb(85, 255, 85);
+                case SkyBlockItemTier.RARE:
+                    return Color.FromArgb(85, 85, 255);
+                case SkyBlockItemTier.EPIC:
+                    return Color.FromArgb(170, 0, 170);
+                case SkyBlockItemTier.LEGENDARY:
+                    return Color.FromArgb(255, 170, 0);
+                case SkyBlockItemTier.MYTHIC:
+                    return Color.FromArgb(255, 85, 255);
+                case SkyBlockItemTier.SUPREME:
+                    return Color.FromArgb(85, 255, 255);
+                case SkyBlockItemTier.SPECIAL:
+                    return Color.FromArgb(255, 85, 85);
+                case SkyBlockItemTier.VERY_SPECIAL:
+                    return Color.FromArgb(255, 85, 85);
+            }
         }
     }
 }

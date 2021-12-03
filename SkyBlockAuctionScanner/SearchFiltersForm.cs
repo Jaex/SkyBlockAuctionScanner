@@ -25,7 +25,6 @@
 using ShareX.HelpersLib;
 using SkyBlockAPILib;
 using System;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -59,10 +58,7 @@ namespace SkyBlockAuctionScanner
         {
             ListViewItem lvi = new ListViewItem();
             lvi.Tag = searchFilter;
-            if (!searchFilter.Enabled)
-            {
-                lvi.ForeColor = Color.IndianRed;
-            }
+            lvi.ForeColor = searchFilter.GetTextColor();
             lvi.Text = searchFilter.ToString();
             lvi.SubItems.Add(searchFilter.ItemTier.GetDescription());
             lvi.SubItems.Add(searchFilter.BINFilter.GetDescription());
@@ -84,14 +80,7 @@ namespace SkyBlockAuctionScanner
                     {
                         if (form.ShowDialog() == DialogResult.OK)
                         {
-                            if (searchFilter.Enabled)
-                            {
-                                lvi.ForeColor = ShareXResources.Theme.TextColor;
-                            }
-                            else
-                            {
-                                lvi.ForeColor = Color.IndianRed;
-                            }
+                            lvi.ForeColor = searchFilter.GetTextColor();
                             lvi.Text = searchFilter.ToString();
                             lvi.SubItems[1].Text = searchFilter.ItemTier.GetDescription();
                             lvi.SubItems[2].Text = searchFilter.BINFilter.GetDescription();
