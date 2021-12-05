@@ -41,12 +41,34 @@ namespace SkyBlockAuctionScanner
 
             Settings = settings;
 
-            foreach (SkyBlockAuctionFilter searchFilter in Settings.SearchFilters)
-            {
-                AddSearchFilter(searchFilter);
-            }
-
+            UpdateSearchFilters();
             UpdateButtonStates();
+        }
+
+        private void UpdateSearchFilters(bool sort = true)
+        {
+            lvSearchFilters.Items.Clear();
+
+            if (Settings.SearchFilters.Count > 0)
+            {
+                if (sort)
+                {
+                    Settings.SearchFilters = Settings.SearchFilters.
+                        OrderBy(x => !x.Enabled).
+                        ThenBy(x => x.ItemName).
+                        ThenBy(x => x.ItemLore).
+                        ThenBy(x => x.ItemLevel).
+                        ThenBy(x => x.ItemStars).
+                        ThenBy(x => x.ItemTier).
+                        ThenBy(x => x.PriceLimit).
+                        ToList();
+                }
+
+                foreach (SkyBlockAuctionFilter searchFilter in Settings.SearchFilters)
+                {
+                    AddSearchFilter(searchFilter);
+                }
+            }
         }
 
         private void UpdateButtonStates()
@@ -80,11 +102,7 @@ namespace SkyBlockAuctionScanner
                     {
                         if (form.ShowDialog() == DialogResult.OK)
                         {
-                            lvi.ForeColor = searchFilter.GetTextColor();
-                            lvi.Text = searchFilter.ToString();
-                            lvi.SubItems[1].Text = searchFilter.ItemTier.GetDescription();
-                            lvi.SubItems[2].Text = searchFilter.BINFilter.GetDescription();
-                            lvi.SubItems[3].Text = searchFilter.PriceLimit.ToString("N0");
+                            UpdateSearchFilters();
                         }
                     }
                 }
@@ -100,7 +118,7 @@ namespace SkyBlockAuctionScanner
                 if (form.ShowDialog() == DialogResult.OK)
                 {
                     Settings.SearchFilters.Add(searchFilter);
-                    AddSearchFilter(searchFilter);
+                    UpdateSearchFilters();
                 }
             }
         }
@@ -117,26 +135,6 @@ namespace SkyBlockAuctionScanner
                 int index = lvSearchFilters.SelectedIndices[0];
                 Settings.SearchFilters.RemoveAt(index);
                 lvSearchFilters.Items.RemoveAt(index);
-            }
-        }
-
-        private void btnSort_Click(object sender, EventArgs e)
-        {
-            Settings.SearchFilters = Settings.SearchFilters.
-                OrderBy(x => !x.Enabled).
-                ThenBy(x => x.ItemName).
-                ThenBy(x => x.ItemLore).
-                ThenBy(x => x.ItemLevel).
-                ThenBy(x => x.ItemStars).
-                ThenBy(x => x.ItemTier).
-                ThenBy(x => x.PriceLimit).
-                ToList();
-
-            lvSearchFilters.Items.Clear();
-
-            foreach (SkyBlockAuctionFilter searchFilter in Settings.SearchFilters)
-            {
-                AddSearchFilter(searchFilter);
             }
         }
 
