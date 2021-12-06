@@ -71,6 +71,7 @@ namespace SkyBlockAuctionScanner
 
             ListViewItem lvi = new ListViewItem();
             lvi.Tag = auction;
+            lvi.ForeColor = SkyBlockHelpers.GetItemTierColor(auction.ItemTier);
             lvi.Text = DateTime.Now.ToString();
             lvi.SubItems.Add(auction.ItemName);
             lvi.SubItems.Add(auction.StartingBid.ToString("N0"));

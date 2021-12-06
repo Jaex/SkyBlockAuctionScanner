@@ -33,8 +33,6 @@ namespace SkyBlockAPILib
 {
     public class SkyBlockAuctionFilter
     {
-        private const char SkyBlockItemStar = '✪';
-
         public bool Enabled { get; set; } = true;
         public string ItemName { get; set; } = "";
         public bool ItemNameUseRegex { get; set; } = false;
@@ -59,8 +57,7 @@ namespace SkyBlockAPILib
 
             if (ItemStars > 0)
             {
-                string stars = new string(SkyBlockItemStar, ItemStars);
-                itemName += " " + stars;
+                itemName += " " + SkyBlockHelpers.GetItemStars(ItemStars);
             }
 
             if (!string.IsNullOrWhiteSpace(ItemLore))
@@ -119,14 +116,13 @@ namespace SkyBlockAPILib
 
             if (ItemStars > 0)
             {
-                string stars = new string(SkyBlockItemStar, ItemStars);
+                string stars = SkyBlockHelpers.GetItemStars(ItemStars);
                 auctions = auctions.Where(x => x.ItemName.EndsWith(stars, StringComparison.OrdinalIgnoreCase));
             }
 
             if (ItemTier != SkyBlockItemTier.NO_FILTER)
             {
-                string tier = ItemTier.ToString();
-                auctions = auctions.Where(x => x.Tier.Equals(tier, StringComparison.OrdinalIgnoreCase));
+                auctions = auctions.Where(x => x.ItemTier >= ItemTier);
             }
 
             if (PriceLimit > 0)
@@ -167,30 +163,7 @@ namespace SkyBlockAPILib
                 return Color.FromArgb(85, 85, 85);
             }
 
-            switch (ItemTier)
-            {
-                default:
-                case SkyBlockItemTier.NO_FILTER:
-                    return Color.FromArgb(210, 210, 210);
-                case SkyBlockItemTier.COMMON:
-                    return Color.FromArgb(255, 255, 255);
-                case SkyBlockItemTier.UNCOMMON:
-                    return Color.FromArgb(85, 255, 85);
-                case SkyBlockItemTier.RARE:
-                    return Color.FromArgb(85, 85, 255);
-                case SkyBlockItemTier.EPIC:
-                    return Color.FromArgb(170, 0, 170);
-                case SkyBlockItemTier.LEGENDARY:
-                    return Color.FromArgb(255, 170, 0);
-                case SkyBlockItemTier.MYTHIC:
-                    return Color.FromArgb(255, 85, 255);
-                case SkyBlockItemTier.SUPREME:
-                    return Color.FromArgb(85, 255, 255);
-                case SkyBlockItemTier.SPECIAL:
-                    return Color.FromArgb(255, 85, 85);
-                case SkyBlockItemTier.VERY_SPECIAL:
-                    return Color.FromArgb(255, 85, 85);
-            }
+            return SkyBlockHelpers.GetItemTierColor(ItemTier);
         }
     }
 }

@@ -55,6 +55,7 @@ namespace SkyBlockAPILib
 
         public DateTime StartDateTime => DateTimeOffset.FromUnixTimeMilliseconds(Start).DateTime;
         public DateTime EndDateTime => DateTimeOffset.FromUnixTimeMilliseconds(End).DateTime;
+        public SkyBlockItemTier ItemTier => Enum.TryParse(Tier, out SkyBlockItemTier itemTier) ? itemTier : SkyBlockItemTier.NO_FILTER;
         public string ViewAuctionCommand => "/viewauction " + UUID;
     }
 }
