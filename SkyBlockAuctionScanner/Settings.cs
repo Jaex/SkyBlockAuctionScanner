@@ -30,6 +30,7 @@ namespace SkyBlockAuctionScanner
 {
     public class Settings : SettingsBase<Settings>
     {
+        public bool MinimizeToTray { get; set; } = false;
         public List<SkyBlockAuctionFilter> SearchFilters { get; set; } = new List<SkyBlockAuctionFilter>();
         public bool ShowNotification { get; set; } = true;
         public bool CopyViewAuctionCommand { get; set; } = true;

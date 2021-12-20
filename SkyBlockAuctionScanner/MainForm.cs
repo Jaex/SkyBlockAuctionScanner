@@ -130,7 +130,7 @@ namespace SkyBlockAuctionScanner
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (e.CloseReason == CloseReason.UserClosing && !forceClose)
+            if (Program.Settings.MinimizeToTray && e.CloseReason == CloseReason.UserClosing && !forceClose)
             {
                 e.Cancel = true;
                 Hide();

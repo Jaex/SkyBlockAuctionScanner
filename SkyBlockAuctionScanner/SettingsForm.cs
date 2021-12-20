@@ -39,8 +39,14 @@ namespace SkyBlockAuctionScanner
 
             Settings = settings;
 
+            cbMinimizeToTray.Checked = Settings.MinimizeToTray;
             cbShowNotification.Checked = Settings.ShowNotification;
             cbCopyViewAuctionCommand.Checked = Settings.CopyViewAuctionCommand;
+        }
+
+        private void cbMinimizeToTray_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.MinimizeToTray = cbMinimizeToTray.Checked;
         }
 
         private void cbShowNotification_CheckedChanged(object sender, EventArgs e)

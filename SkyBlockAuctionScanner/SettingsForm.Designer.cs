@@ -31,15 +31,16 @@
             this.cbCopyViewAuctionCommand = new System.Windows.Forms.CheckBox();
             this.cbShowNotification = new System.Windows.Forms.CheckBox();
             this.lblOnAuctionFound = new System.Windows.Forms.Label();
+            this.cbMinimizeToTray = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // cbCopyViewAuctionCommand
             // 
             this.cbCopyViewAuctionCommand.AutoSize = true;
-            this.cbCopyViewAuctionCommand.Location = new System.Drawing.Point(16, 64);
+            this.cbCopyViewAuctionCommand.Location = new System.Drawing.Point(16, 96);
             this.cbCopyViewAuctionCommand.Name = "cbCopyViewAuctionCommand";
             this.cbCopyViewAuctionCommand.Size = new System.Drawing.Size(197, 20);
-            this.cbCopyViewAuctionCommand.TabIndex = 2;
+            this.cbCopyViewAuctionCommand.TabIndex = 3;
             this.cbCopyViewAuctionCommand.Text = "Copy view auction command";
             this.cbCopyViewAuctionCommand.UseVisualStyleBackColor = true;
             this.cbCopyViewAuctionCommand.CheckedChanged += new System.EventHandler(this.cbCopyViewAuctionCommand_CheckedChanged);
@@ -47,10 +48,10 @@
             // cbShowNotification
             // 
             this.cbShowNotification.AutoSize = true;
-            this.cbShowNotification.Location = new System.Drawing.Point(16, 40);
+            this.cbShowNotification.Location = new System.Drawing.Point(16, 72);
             this.cbShowNotification.Name = "cbShowNotification";
             this.cbShowNotification.Size = new System.Drawing.Size(125, 20);
-            this.cbShowNotification.TabIndex = 1;
+            this.cbShowNotification.TabIndex = 2;
             this.cbShowNotification.Text = "Show notification";
             this.cbShowNotification.UseVisualStyleBackColor = true;
             this.cbShowNotification.CheckedChanged += new System.EventHandler(this.cbShowNotification_CheckedChanged);
@@ -58,11 +59,22 @@
             // lblOnAuctionFound
             // 
             this.lblOnAuctionFound.AutoSize = true;
-            this.lblOnAuctionFound.Location = new System.Drawing.Point(13, 16);
+            this.lblOnAuctionFound.Location = new System.Drawing.Point(13, 48);
             this.lblOnAuctionFound.Name = "lblOnAuctionFound";
             this.lblOnAuctionFound.Size = new System.Drawing.Size(109, 16);
-            this.lblOnAuctionFound.TabIndex = 0;
+            this.lblOnAuctionFound.TabIndex = 1;
             this.lblOnAuctionFound.Text = "On auction found:";
+            // 
+            // cbMinimizeToTray
+            // 
+            this.cbMinimizeToTray.AutoSize = true;
+            this.cbMinimizeToTray.Location = new System.Drawing.Point(16, 16);
+            this.cbMinimizeToTray.Name = "cbMinimizeToTray";
+            this.cbMinimizeToTray.Size = new System.Drawing.Size(171, 20);
+            this.cbMinimizeToTray.TabIndex = 0;
+            this.cbMinimizeToTray.Text = "Minimize to tray on close";
+            this.cbMinimizeToTray.UseVisualStyleBackColor = true;
+            this.cbMinimizeToTray.CheckedChanged += new System.EventHandler(this.cbMinimizeToTray_CheckedChanged);
             // 
             // SettingsForm
             // 
@@ -70,6 +82,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(354, 215);
+            this.Controls.Add(this.cbMinimizeToTray);
             this.Controls.Add(this.cbCopyViewAuctionCommand);
             this.Controls.Add(this.lblOnAuctionFound);
             this.Controls.Add(this.cbShowNotification);
@@ -90,5 +103,6 @@
         private System.Windows.Forms.CheckBox cbShowNotification;
         private System.Windows.Forms.CheckBox cbCopyViewAuctionCommand;
         private System.Windows.Forms.Label lblOnAuctionFound;
+        private System.Windows.Forms.CheckBox cbMinimizeToTray;
     }
 }
