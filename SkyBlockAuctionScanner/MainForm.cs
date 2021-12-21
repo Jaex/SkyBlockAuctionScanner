@@ -135,6 +135,10 @@ namespace SkyBlockAuctionScanner
                 e.Cancel = true;
                 Hide();
             }
+            else
+            {
+                auctionManager.Stop();
+            }
         }
 
         private void niMain_MouseClick(object sender, MouseEventArgs e)
@@ -222,11 +226,6 @@ namespace SkyBlockAuctionScanner
 
         private void tsmiExit_Click(object sender, EventArgs e)
         {
-            if (auctionManager.IsRunning)
-            {
-                auctionManager.Stop();
-            }
-
             ForceClose();
         }
     }

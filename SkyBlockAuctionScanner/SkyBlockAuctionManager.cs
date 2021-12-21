@@ -120,6 +120,7 @@ namespace SkyBlockAuctionScanner
             finally
             {
                 cts.Dispose();
+                cts = null;
 
                 IsRunning = false;
 
