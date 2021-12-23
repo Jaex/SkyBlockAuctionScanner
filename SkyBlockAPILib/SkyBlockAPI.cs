@@ -23,6 +23,7 @@
 #endregion License Information (GPL v3)
 
 using Newtonsoft.Json;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
@@ -36,7 +37,9 @@ namespace SkyBlockAPILib
 
         public SkyBlockAPI()
         {
-            client = new HttpClient();
+            HttpClientHandler handler = new HttpClientHandler();
+            handler.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+            client = new HttpClient(handler);
             client.DefaultRequestHeaders.CacheControl = new CacheControlHeaderValue()
             {
                 NoCache = true
